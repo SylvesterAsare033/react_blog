@@ -2,8 +2,10 @@
 import { Article } from '../../lib/models/Article';
 import { connectToDatabase } from '../../lib/mongodb';
 
+await connectToDatabase();
+
 export default async function handler(req: any, res: any) {
-  await connectToDatabase();
+  
 // 
   const { id } = req.query;
 
