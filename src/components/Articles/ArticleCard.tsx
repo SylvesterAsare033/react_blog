@@ -5,7 +5,7 @@ import { Article } from "../../types/Article";
 interface ArticleCardProps {
   article: Article;
   onClick: (article: Article) => void;
-  size?: "small" | "medium" | "large" | "headline";
+  size?: "small" | "medium" | "large" | "headline" | "compact";
   imagePosition?: "left" | "right";
 }
 
@@ -34,6 +34,9 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
       "lg:flex lg:space-x-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer border border-gray-200 overflow-hidden",
     headline:
       "block bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 cursor-pointer border border-gray-200 overflow-hidden",
+    compact:
+      "flex items-center space-x-3 bg-white border rounded p-2 shadow-sm hover:shadow cursor-pointer",
+
   };
 
   const smallImagePositionClasses = {
@@ -46,6 +49,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     medium: "w-full h-48 rounded-md",
     large: "lg:w-80 lg:h-48 w-full h-48 lg:flex-shrink-0 rounded-md",
     headline: "w-full h-64 sm:h-80 rounded-t-xl",
+    compact: "w-16 h-16 flex-shrink-0 rounded-md",
   };
 
   const contentClasses = {
@@ -53,6 +57,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     medium: "mt-4 p-4",
     large: "flex-1 lg:mt-0 mt-4 p-6",
     headline: "p-6 space-y-4",
+    compact: "flex-1 min-w-0",
   };
 
   const titleClasses = {
@@ -60,6 +65,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     medium: "text-xl mb-3",
     large: "text-2xl mb-4",
     headline: "text-3xl sm:text-4xl font-bold mb-4 leading-tight",
+    compact: "text-sm font-semibold mb-1",
   };
 
   const excerptClasses = {
@@ -67,6 +73,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     medium: "text-sm",
     large: "text-lg",
     headline: "text-lg sm:text-xl",
+    compact: "text-xs text-gray-600",
   };
 
   return (

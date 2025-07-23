@@ -79,7 +79,7 @@ export const NewsFeed: React.FC<NewsFeedProps> = ({
                 key={article._id || article.id}
                 article={article}
                 onClick={onArticleClick}
-                size="small"
+                size="compact"
               />
             ))}
           </div>
