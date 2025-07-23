@@ -4,7 +4,7 @@ import { connectToDatabase } from '../../lib/mongodb';
 
 export default async function handler(req: any, res: any) {
   await connectToDatabase();
-
+// 
   const { id } = req.query;
 
   if (req.method === 'GET') {
