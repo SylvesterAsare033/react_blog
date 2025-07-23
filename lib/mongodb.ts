@@ -1,30 +1,35 @@
-// MongoDB connection utility for Vercel Serverless Functions
-import { MongoClient, Db } from "mongodb";
+// lib/mongodb.ts
+import mongoose from "mongoose";
 
-// This file is used to connect to MongoDB in a serverless environment like Vercel
-const uri = process.env.MONGODB_URI || "";
-let cachedClient: MongoClient | null = null;
-let cachedDb: Db | null = null;
+const MONGODB_URI = process.env.MONGODB_URI || "";
+
+if (!MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI environment variable");
+}
+
+let cached = (global as any).mongoose;
+
+if (!cached) {
+  cached = (global as any).mongoose = { conn: null, promise: null };
+}
 
 export async function connectToDatabase() {
-  console.log("Connecting to MongoDB with URI:", uri);
-  if (cachedClient && cachedDb) {
-    console.log("Using cached MongoDB client");
-    return { client: cachedClient, db: cachedDb };
+  if (cached.conn) {
+    return cached.conn;
   }
-  if (!uri) {
-    console.error("MONGODB_URI environment variable is not defined");
-    throw new Error("Please define the MONGODB_URI environment variable");
+
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(MONGODB_URI, {
+        bufferCommands: false,
+        serverSelectionTimeoutMS: 5000,
+      })
+      .then((mongoose) => {
+        console.log("✅ Mongoose connected");
+        return mongoose;
+      });
   }
-  try {
-    const client = await MongoClient.connect(uri);
-    const db = client.db();
-    cachedClient = client;
-    cachedDb = db;
-    console.log("MongoDB connection established");
-    return { client, db };
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    throw error;
-  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
 }
