@@ -55,6 +55,10 @@ const articleSchema = new mongoose.Schema({
   featured: {
     type: Boolean,
     default: false
+  },
+  picksForYou: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true

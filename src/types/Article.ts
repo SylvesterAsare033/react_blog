@@ -12,6 +12,7 @@ export interface Article {
   status: 'published' | 'draft';
   readTime: number;
   featured: boolean;
+  picksForYou: boolean;
 }
 
 export interface Category {

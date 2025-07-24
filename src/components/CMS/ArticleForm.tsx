@@ -20,7 +20,8 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCan
     tags: [] as string[],
     status: 'draft' as 'published' | 'draft',
     readTime: 1,
-    featured: false
+    featured: false,
+    picksForYou: false
   });
 
   const [tagInput, setTagInput] = useState('');
@@ -37,7 +38,8 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCan
         tags: article.tags,
         status: article.status,
         readTime: article.readTime,
-        featured: article.featured
+        featured: article.featured,
+        picksForYou: article.picksForYou || false
       });
     }
   }, [article]);
@@ -284,6 +286,24 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({ article, onSave, onCan
             </label>
             <p className="mt-1 text-xs text-gray-500">
               Featured articles will appear in the "Featured Stories" section
+            </p>
+          </div>
+
+          {/* Picks For You */}
+          <div>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={formData.picksForYou}
+                onChange={(e) => setFormData(prev => ({ ...prev, picksForYou: e.target.checked }))}
+                className="mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-sm font-medium text-gray-700">
+                Picks For You
+              </span>
+            </label>
+            <p className="mt-1 text-xs text-gray-500">
+              Articles marked as "Picks For You" will appear in the personalized picks section
             </p>
           </div>
 
