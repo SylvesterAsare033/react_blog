@@ -7,6 +7,7 @@ interface ArticleCardProps {
   onClick: (article: Article) => void;
   size?: "small" | "medium" | "large" | "headline" | "compact";
   imagePosition?: "left" | "right";
+  theme?: "light" | "dark";
 }
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({
@@ -27,15 +28,15 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
   const cardClasses = {
     small:
-      "bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer border border-gray-200 overflow-hidden",
+      "bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 overflow-hidden",
     medium:
-      "block bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer border border-gray-200 overflow-hidden",
+      "block bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 overflow-hidden",
     large:
-      "lg:flex lg:space-x-6 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer border border-gray-200 overflow-hidden",
+      "lg:flex lg:space-x-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 overflow-hidden",
     headline:
-      "block bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 cursor-pointer border border-gray-200 overflow-hidden",
+      "block bg-white dark:bg-gray-800 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 overflow-hidden",
     compact:
-      "flex items-center space-x-3 bg-white border rounded p-2 shadow-sm hover:shadow cursor-pointer",
+      "flex items-center space-x-3 bg-white dark:bg-gray-800 border rounded p-2 shadow-sm hover:shadow cursor-pointer dark:border-gray-700",
 
   };
 
@@ -130,18 +131,18 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
         </div>
 
         <h3
-          className={`font-extrabold text-gray-900 hover:text-blue-600 transition-colors line-clamp-2 ${titleClasses[size]}`}
+          className={`font-extrabold text-gray-900 dark:text-gray-100 hover:text-blue-600 transition-colors line-clamp-2 ${titleClasses[size]}`}
         >
           {article.title}
         </h3>
 
         <p
-          className={`text-gray-700 mb-4 line-clamp-3 ${excerptClasses[size]}`}
+          className={`text-gray-700 dark:text-gray-300 mb-4 line-clamp-3 ${excerptClasses[size]}`}
         >
           {article.excerpt}
         </p>
 
-        <div className="flex items-center justify-between text-xs text-gray-600">
+        <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
           <div className="flex items-center space-x-2">
             <User className="w-4 h-4" />
             <span>{article.author}</span>

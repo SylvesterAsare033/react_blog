@@ -8,12 +8,14 @@ interface NewsFeedProps {
   onArticleClick: (article: Article) => void;
   searchQuery: string;
   activeCategory: string;
+  theme: 'light' | 'dark';
 }
 
 export const NewsFeed: React.FC<NewsFeedProps> = ({
   onArticleClick,
   searchQuery,
   activeCategory,
+  theme,
 }) => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -69,13 +71,14 @@ export const NewsFeed: React.FC<NewsFeedProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Top Stories */}
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-2xl font-bold text-gray-900">Top stories</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Top stories</h2>
 
           {firstFeatured && (
             <ArticleCard
               article={firstFeatured}
               onClick={onArticleClick}
               size="headline"
+              theme={theme}
             />
           )}
 
@@ -89,6 +92,7 @@ export const NewsFeed: React.FC<NewsFeedProps> = ({
             article={article}
             onClick={onArticleClick}
             size="small"
+            theme={theme}
           />
         ))}
           </div>
@@ -102,13 +106,14 @@ export const NewsFeed: React.FC<NewsFeedProps> = ({
 
         {/* Right Column: Picks for You */}
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-gray-900">Picks for you</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Picks for you</h2>
           {picksForYouArticles.map((article) => (
             <ArticleCard
               key={article._id || article.id}
               article={article}
               onClick={onArticleClick}
               size="compact"
+              theme={theme}
             />
           ))}
         </div>

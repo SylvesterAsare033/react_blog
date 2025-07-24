@@ -76,6 +76,7 @@ function App() {
                 <CategoryTabs
                   activeCategory={activeCategory}
                   onCategoryChange={handleCategoryChange}
+                  theme={theme}
                 />
               )}
               {selectedArticle ? (
@@ -88,6 +89,7 @@ function App() {
                   onArticleClick={handleArticleClick}
                   searchQuery={searchQuery}
                   activeCategory={activeCategory}
+                  theme={theme}
                 />
               )}
             </>
