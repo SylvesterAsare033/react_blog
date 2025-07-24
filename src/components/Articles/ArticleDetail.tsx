@@ -106,7 +106,7 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, onBack, t
 
           <div
             className={`prose prose-lg max-w-none mb-8 ${
-              theme === 'dark' ? 'prose-invert' : ''
+              theme === 'dark' ? 'prose-invert text-white' : ''
             }`}
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
