@@ -7,8 +7,6 @@ import { ArticleDetail } from './components/Articles/ArticleDetail';
 import { CMSDashboard } from './components/CMS/CMSDashboard';
 import { Article } from './types/Article';
 
-
-
 function App() {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -83,6 +81,7 @@ function App() {
                 <ArticleDetail
                   article={selectedArticle}
                   onBack={handleBackToNews}
+                  theme={theme}
                 />
               ) : (
                 <NewsFeed
@@ -97,6 +96,7 @@ function App() {
           <Route path="/cms" element={
             <CMSDashboard
               onViewArticle={handleArticleClick}
+              theme={theme}
             />
           } />
         </Routes>

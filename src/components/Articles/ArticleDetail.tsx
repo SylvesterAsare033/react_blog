@@ -5,9 +5,10 @@ import { Article } from '../../types/Article';
 interface ArticleDetailProps {
   article: Article;
   onBack: () => void;
+  theme?: 'light' | 'dark';
 }
 
-export const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, onBack }) => {
+export const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, onBack, theme = 'light' }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -35,13 +36,17 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, onBack })
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <button
         onClick={onBack}
-        className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 mb-6 transition-colors"
+        className={`flex items-center space-x-2 mb-6 transition-colors ${
+          theme === 'dark' ? 'text-blue-400 hover:text-blue-600' : 'text-blue-600 hover:text-blue-800'
+        }`}
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to news</span>
       </button>
 
-      <article className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+      <article className={`rounded-lg shadow-md overflow-hidden border ${
+        theme === 'dark' ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'
+      }`}>
         <div className="w-full h-64 md:h-96 overflow-hidden rounded-md">
           <img
             src={article.imageUrl}
@@ -51,7 +56,8 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, onBack })
         </div>
 
         <div className="p-6 md:p-8">
-          <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+          <div className="flex items-center space-x-4 text-sm mb-4" 
+            style={{ color: theme === 'dark' ? '#9CA3AF' : undefined }}>
             <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-semibold tracking-wide">
               {article.category}
             </span>
@@ -61,18 +67,26 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, onBack })
             </div>
           </div>
 
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-6 leading-tight">
+          <h1 className={`text-4xl font-extrabold mb-6 leading-tight ${
+            theme === 'dark' ? 'text-gray-100' : 'text-gray-900'
+          }`}>
             {article.title}
           </h1>
 
-          <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+          <p className={`text-xl mb-8 leading-relaxed ${
+            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+          }`}>
             {article.excerpt}
           </p>
 
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-200">
+          <div className={`flex flex-wrap items-center gap-4 text-sm mb-8 pb-8 border-b ${
+            theme === 'dark' ? 'text-gray-400 border-gray-700' : 'text-gray-500 border-gray-200'
+          }`}>
             <div className="flex items-center space-x-2">
               <User className="w-4 h-4" />
-              <span className="font-semibold text-gray-900">{article.author}</span>
+              <span className={`font-semibold ${
+                theme === 'dark' ? 'text-gray-100' : 'text-gray-900'
+              }`}>{article.author}</span>
             </div>
             <div className="flex items-center space-x-2">
               <Calendar className="w-4 h-4" />
@@ -80,7 +94,9 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, onBack })
             </div>
             <button
               onClick={handleShare}
-              className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 transition-colors"
+              className={`flex items-center space-x-1 transition-colors ${
+                theme === 'dark' ? 'text-blue-400 hover:text-blue-600' : 'text-blue-600 hover:text-blue-800'
+              }`}
               aria-label="Share article"
             >
               <Share2 className="w-4 h-4" />
@@ -89,19 +105,29 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, onBack })
           </div>
 
           <div
-            className="prose prose-lg max-w-none mb-8"
+            className={`prose prose-lg max-w-none mb-8 ${
+              theme === 'dark' ? 'prose-invert' : ''
+            }`}
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
 
           {article.tags.length > 0 && (
-            <div className="flex items-center space-x-2 pt-8 border-t border-gray-200">
-              <Tag className="w-4 h-4 text-gray-400" />
-              <span className="text-sm font-semibold text-gray-700">Tags:</span>
+            <div className={`flex items-center space-x-2 pt-8 border-t ${
+              theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
+            }`}>
+              <Tag className={`w-4 h-4 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-400'
+              }`} />
+              <span className={`text-sm font-semibold ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+              }`}>Tags:</span>
               <div className="flex flex-wrap gap-2">
                 {article.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-semibold"
+                    className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      theme === 'dark' ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
+                    }`}
                   >
                     {tag}
                   </span>
